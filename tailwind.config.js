@@ -34,6 +34,7 @@ const config = {
       },
       black: {
         DEFAULT: '#000000',
+        alt: '#0d0d0d',
       },
       grey: {
         DEFAULT: '#EBECEC4D',

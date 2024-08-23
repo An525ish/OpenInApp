@@ -1,7 +1,10 @@
+import UploadCSV from "@/components/upload-csv/UploadCsv"
 
 const Dashboard = () => {
     return (
-        <div>Dashboard</div>
+        <div className="p-8">
+            <UploadCSV />
+        </div>
     )
 }
 
