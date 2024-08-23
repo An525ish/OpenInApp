@@ -61,20 +61,20 @@ const DataTable = ({ data }) => {
                     ))}
                 </tbody>
             </table>
-            <div className="mt-4 flex justify-between items-center">
+            <div className="my-4 flex justify-between items-center">
                 <div>
                     Page {currentPage} of {totalPages}
                 </div>
                 <div>
                     <button
-                        className="px-4 py-2 bg-gray-800 text-white rounded mr-2"
+                        className="px-4 py-1 bg-background-alt shadow rounded mr-6"
                         onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                         disabled={currentPage === 1}
                     >
                         Previous
                     </button>
                     <button
-                        className="px-4 py-2 bg-gray-800 text-white rounded"
+                        className="px-4 py-1 bg-background-alt shadow rounded"
                         onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                         disabled={currentPage === totalPages}
                     >

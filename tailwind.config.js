@@ -12,6 +12,7 @@ function withOpacity(variableName) {
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     colors: {
       primary: {
@@ -24,6 +25,7 @@ const config = {
       },
       background: {
         DEFAULT: withOpacity('--color-background'),
+        alt: withOpacity('--color-background-alt'),
       },
       border: {
         DEFAULT: withOpacity('--color-border'),

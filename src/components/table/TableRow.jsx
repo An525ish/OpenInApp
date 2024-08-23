@@ -14,7 +14,7 @@ const TableRow = ({ data, index }) => {
             <td className="py-2 px-4 whitespace-nowrap">{data.prefix}</td>
             <td className="py-2 px-4 whitespace-nowrap">
                 <select
-                    className="bg-black-alt text-white p-2 rounded-md"
+                    className="bg-background-alt shadow p-2 rounded-md"
                     onChange={(e) => handleTagSelect(e.target.value)}
                     value=""
                 >

@@ -20,7 +20,7 @@ const SidebarItem = ({ Icon, text, id }) => {
                 </span>
                 {!expanded && (
                     <div
-                        className={`absolute left-full capitalize rounded-md px-2 py-1 ml-6 bg-background-alt text-body-700 shadow-lg border border-border text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 z-30 whitespace-nowrap`}
+                        className={`absolute left-full capitalize rounded-md px-2 py-1 ml-6 text-body-700 bg-background-alt shadow-lg border border-border text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 z-30 whitespace-nowrap`}
                     >
                         {text}
                     </div>

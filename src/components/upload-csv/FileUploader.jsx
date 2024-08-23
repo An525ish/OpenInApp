@@ -26,7 +26,7 @@ const FileUploader = ({ onFileUpload }) => {
     };
 
     return (
-        <div className='w-3/5 mx-auto bg-black-alt p-4 rounded-lg'>
+        <div className='w-3/5 mx-auto shadow bg-background-alt p-4 rounded-lg'>
             {!selectedFile ? (
                 <div {...getRootProps()} className="border-2 border-dashed border-grey-dark p-4 md:p-8 mb-4 md:mb-6 text-center cursor-pointer">
                     <input {...getInputProps()} />
@@ -35,7 +35,7 @@ const FileUploader = ({ onFileUpload }) => {
                     ) : (
                         <div>
                             <img src={excelSheet} alt="" className='w-24 h-24 mx-auto' />
-                            <p className="mt-2 text-sm md:text-base">Drop your Excel sheet here or <span className="text-primary">browse</span></p>
+                            <p className="mt-2 text-sm md:text-base">Drop your Excel sheet here or <span className="text-primary font-semibold">browse</span></p>
                         </div>
                     )}
                 </div>
