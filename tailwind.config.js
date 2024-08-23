@@ -60,6 +60,12 @@ const config = {
       },
       transparent: 'transparent',
     },
+    extend: {
+      backgroundImage: {
+        'hover-gradient':
+          'linear-gradient(90deg, rgba(172, 169, 255, 0.5) 0%, rgba(172, 169, 255, 0.2) 30%, rgba(172, 169, 255, 0.1) 50%, rgba(172, 169, 255, 0) 100%)',
+      },
+    },
   },
   plugins: [
     plugin(({ addUtilities }) => {

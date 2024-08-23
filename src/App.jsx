@@ -13,8 +13,6 @@ function App() {
     return <Outlet />;
   };
 
-  console.log('first')
-
   let router = createBrowserRouter([
     {
       path: '/',
@@ -33,20 +31,22 @@ function App() {
           ],
         },
         {
-          path: '/',
-          element: (
-            <RouteGuard isPublic={false}>
-              <DashboardLayout />
-            </RouteGuard>
-          ),
+          element: <RouteGuard isPublic={false} />,
           children: [
             {
-              index: true,
-              lazy: async () => {
-                const module = await import("@/pages/Dashboard");
-                return { Component: module.default };
-              },
-            },
+              path: '/',
+              element: <DashboardLayout />,
+              children: [
+                {
+                  index: true,
+                  lazy: async () => {
+                    const module = await import("@/pages/Dashboard");
+                    return { Component: module.default };
+                  },
+                },
+
+              ],
+            }
           ],
         },
       ],
