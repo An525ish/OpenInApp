@@ -53,6 +53,13 @@ function App() {
         },
       ],
     },
+    {
+      path: '*',
+      lazy: async () => {
+        const module = await import("@/pages/NotFound");
+        return { Component: module.default };
+      },
+    }
   ]);
 
 
