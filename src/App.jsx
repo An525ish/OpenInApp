@@ -2,9 +2,11 @@ import DashboardLayout from "@/layout/DashboardLayout";
 import { createBrowserRouter, Navigate, Outlet, RouterProvider } from "react-router-dom";
 import { Toaster } from 'sonner';
 import './App.css';
+import { UserContext } from "@/context/UserContext";
+import { useContext } from "react";
 
 function App() {
-  let user = true;
+  const { user } = useContext(UserContext);
 
   const RouteGuard = ({ isPublic }) => {
     if (isPublic ? user : !user) {
