@@ -1,6 +1,6 @@
 import { UserContext } from '@/context/UserContext';
 import { useGoogleLogin } from '@react-oauth/google';
-import { Smile, Apple, Github, Twitter, Linkedin, MessageCircle } from 'lucide-react';
+import { Chrome, Apple, Github, Twitter, Linkedin, MessageCircle } from 'lucide-react';
 import { useContext, useState } from 'react';
 import logo from '@/assets/logo.svg';
 
@@ -48,9 +48,9 @@ const SignInForm = () => {
     return (
         <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-8">
             <div className="max-w-md w-full space-y-8">
-                <div className="md:hidden flex items-center justify-center w-full mb-8 bg-white py-1 px-2 rounded-3xl">
+                <div className="md:hidden flex items-center justify-between w-2/5 mx-auto mb-8 bg-white py-1 px-2 rounded-3xl">
                     <img src={logo} alt="Base Logo" className="mr-2" />
-                    <span className="text-black text-xl font-bold">Base</span>
+                    <span className="text-black text-xl font-bold mr-4">Base</span>
                 </div>
                 <div>
                     <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">Sign In</h2>
@@ -61,7 +61,7 @@ const SignInForm = () => {
                         onClick={() => googleLogin()}
                         className="flex-1 flex items-center justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-background-alt hover:bg-gray-50"
                     >
-                        <Smile className="mr-2" /> Sign in with Google
+                        <Chrome className="mr-2" /> Sign in with Google
                     </button>
                     <button className="flex-1 flex items-center justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-background-alt hover:bg-gray-50">
                         <Apple className="mr-2" /> Sign in with Apple

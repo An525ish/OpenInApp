@@ -8,7 +8,7 @@ import { UserProvider } from '@/context/UserContext'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <UserProvider>
-      <GoogleOAuthProvider clientId="http://627228315031-9li6t205om7d9t25oo4onj3bnu5dgstc.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <App />
       </GoogleOAuthProvider>
     </UserProvider>

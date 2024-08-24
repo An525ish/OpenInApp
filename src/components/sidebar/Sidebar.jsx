@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { PanelLeftOpen, PanelRightOpen, X } from 'lucide-react';
 import { createContext, useState, useEffect } from "react";
 import logo from '@/assets/logo.svg'
 import ThemeToggle from '../theme-toggle/ThemeToggle';
@@ -48,9 +48,9 @@ const Sidebar = ({ children, isMobileMenuOpen, toggleMobileMenu }) => {
                         {isSmallScreen ? (
                             <X size={24} />
                         ) : expanded ? (
-                            <ChevronLeft size={40} />
+                            <PanelLeftOpen size={30} />
                         ) : (
-                            <ChevronRight size={30} className='ml-2' />
+                            <PanelRightOpen size={30} className='ml-2' />
                         )}
                     </button>
                 </div>
