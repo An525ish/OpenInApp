@@ -10,7 +10,7 @@ const SidebarItem = ({ Icon, text, id }) => {
     return (
         <NavLink to={`/${id}`} className={({ isActive }) => setActive(isActive)} >
             <li
-                className={`relative flex items-center p-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${active ? 'bg-gradient-background text-body' : 'hover:bg-hover-gradient text-body-700'}`}
+                className={`relative flex items-center p-3 my-1 font-medium rounded-md cursor-pointer group ${active ? 'bg-gradient-background text-body' : 'hover:bg-hover-gradient text-body-700'}`}
             >
                 <Icon className={`w-7 h-7 hover:fill-body-700 mr-2 ${active && 'fill-body'}`} />
                 <span

@@ -8,10 +8,9 @@ const Dashboard = () => {
 
     return (
         <div>
-            <header className="flex justify-between">
-                <h1 className="text-2xl font-bold mb-6">Upload CSV</h1>
-
-                <div className="flex gap-4">
+            <header className="flex justify-between items-center mb-6 md:px-8">
+                <h1 className="md:text-2xl text-xl font-semibold md:font-bold md:ml-0 md:mt-0 ml-16 mt-1">Upload CSV</h1>
+                <div className="flex gap-6">
                     <BellIcon className="cursor-pointer" />
                     <UserCircle className="cursor-pointer" />
                 </div>

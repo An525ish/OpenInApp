@@ -8,8 +8,10 @@ import {
     CalendarClock,
     Calendar,
     Bell,
-    Settings
+    Settings,
+    Menu
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const sidebarItems = Object.freeze([
     {
@@ -50,10 +52,35 @@ const sidebarItems = Object.freeze([
 ]);
 
 const DashboardLayout = () => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 768);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
         <div className='flex'>
-            <Sidebar>
+            {isSmallScreen && (
+                <button
+                    onClick={toggleMobileMenu}
+                    className="fixed top-4 left-4 z-50 p-2 bg-background-alt rounded-md shadow-md"
+                >
+                    <Menu size={24} />
+                </button>
+            )}
+            <Sidebar isMobileMenuOpen={isMobileMenuOpen} toggleMobileMenu={toggleMobileMenu}>
                 {sidebarItems.map(item => (
                     <SidebarItem
                         key={item.id}
@@ -64,7 +91,7 @@ const DashboardLayout = () => {
                     />
                 ))}
             </Sidebar>
-            <main className='p-4 w-full h-screen overflow-y-auto scrollbar-hide'>
+            <main className={`p-4 w-full h-screen overflow-y-auto scrollbar-hide`}>
                 <Outlet />
             </main>
         </div>

@@ -26,7 +26,7 @@ const FileUploader = ({ onFileUpload }) => {
     };
 
     return (
-        <div className='w-3/5 mx-auto shadow bg-background-alt p-4 rounded-lg'>
+        <div className='w-full md:w-3/5 mx-auto shadow bg-background-alt p-4 rounded-lg'>
             {!selectedFile ? (
                 <div {...getRootProps()} className="border-2 border-dashed border-grey-dark p-4 md:p-8 mb-4 md:mb-6 text-center cursor-pointer">
                     <input {...getInputProps()} />

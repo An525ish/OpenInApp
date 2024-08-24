@@ -61,7 +61,7 @@ const DataTable = ({ data }) => {
                     ))}
                 </tbody>
             </table>
-            <div className="my-4 flex justify-between items-center">
+            <div className="my-4 sticky bottom-0 left-0 md:static flex justify-between items-center">
                 <div>
                     Page {currentPage} of {totalPages}
                 </div>
