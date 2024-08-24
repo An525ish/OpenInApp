@@ -59,7 +59,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <Toaster position="bottom-center" />
+      <Toaster richColors position="bottom-center" />
     </>
   );
 }

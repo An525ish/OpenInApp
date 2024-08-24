@@ -1,48 +1,38 @@
-import { UserContext } from '@/context/UserContext';
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 import { useGoogleLogin } from '@react-oauth/google';
 import { Chrome, Apple, Github, Twitter, Linkedin, MessageCircle } from 'lucide-react';
-import { useContext, useState } from 'react';
+import { toast } from 'sonner';
 import logo from '@/assets/logo.svg';
-
+import { UserContext } from '@/context/UserContext';
 
 const SignInForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState({});
     const { setUser } = useContext(UserContext);
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        mode: 'onChange'
+    });
 
     const googleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
             console.log(tokenResponse);
             setUser(true);
+            toast.success('Successfully signed in with Google');
         },
-        onError: () => console.log('Login Failed'),
+        onError: () => toast.error('Google login failed'),
     });
 
-    const validateForm = () => {
-        let formErrors = {};
-        if (!email) {
-            formErrors.email = 'Email is required';
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            formErrors.email = 'Email is invalid';
-        }
-        if (!password) {
-            formErrors.password = 'Password is required';
-        } else if (password.length < 6) {
-            formErrors.password = 'Password must be at least 6 characters';
-        }
-        return formErrors;
+    const onSubmit = (data) => {
+        console.log('Form data:', data);
+        setUser(true);
+        toast.success('Successfully signed in');
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formErrors = validateForm();
-        if (Object.keys(formErrors).length === 0) {
-            setUser(true)
-            console.log('Form is valid');
-        } else {
-            setErrors(formErrors);
-        }
+    const validatePassword = (value) => {
+        if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter";
+        if (!/[a-z]/.test(value)) return "Password must contain at least one lowercase letter";
+        if (!/[0-9]/.test(value)) return "Password must contain at least one number";
+        if (!/[^A-Za-z0-9]/.test(value)) return "Password must contain at least one special character";
+        return true;
     };
 
     return (
@@ -52,10 +42,8 @@ const SignInForm = () => {
                     <img src={logo} alt="Base Logo" className="mr-2" />
                     <span className="text-black text-xl font-bold mr-4">Base</span>
                 </div>
-                <div>
-                    <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">Sign In</h2>
-                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Sign in to your account</p>
-                </div>
+                <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">Sign In</h2>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Sign in to your account</p>
                 <div className="flex space-x-2">
                     <button
                         onClick={() => googleLogin()}
@@ -67,58 +55,59 @@ const SignInForm = () => {
                         <Apple className="mr-2" /> Sign in with Apple
                     </button>
                 </div>
-                <form className="mt-8 space-y-6 bg-background-alt shadow p-8 rounded-lg" onSubmit={handleSubmit}>
+                <form className="mt-8 space-y-6 bg-background-alt shadow p-8 rounded-lg" onSubmit={handleSubmit(onSubmit)}>
                     <div className="rounded-md shadow-sm space-y-4">
                         <div>
                             <label htmlFor="email-address" className="">Email address</label>
                             <input
                                 id="email-address"
-                                name="email"
                                 type="email"
                                 autoComplete="email"
-                                required
-                                className={`mt-2 bg-background w-full px-3 py-2 ${errors.email ? 'border-red' : ''
-                                    } rounded-md outline-none`}
+                                className={`mt-2 bg-background w-full px-3 py-2 ${errors.email ? 'border-red' : ''} rounded-md outline-none`}
                                 placeholder="Email address"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                {...register("email", {
+                                    required: "Email is required",
+                                    pattern: {
+                                        value: /\S+@\S+\.\S+/,
+                                        message: "Email is invalid"
+                                    }
+                                })}
                             />
-                            {errors.email && <p className="mt-2 text-sm text-red">{errors.email}</p>}
+                            {errors.email && <p className="mt-2 text-sm text-red">{errors.email.message}</p>}
                         </div>
                         <div>
                             <label htmlFor="password" className="">Password</label>
                             <input
                                 id="password"
-                                name="password"
                                 type="password"
                                 autoComplete="current-password"
-                                required
-                                className={`mt-2 bg-background w-full px-3 py-2 ${errors.password ? 'border-red' : ''
-                                    } rounded-md outline-none`}
+                                className={`mt-2 bg-background w-full px-3 py-2 ${errors.password ? 'border-red-500' : ''} rounded-md outline-none`}
                                 placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                {...register("password", {
+                                    required: "Password is required",
+                                    minLength: {
+                                        value: 8,
+                                        message: "Password must be at least 8 characters"
+                                    },
+                                    validate: validatePassword
+                                })}
                             />
-                            {errors.password && <p className="mt-2 text-sm text-red">{errors.password}</p>}
+                            {errors.password && <p className="mt-2 text-sm text-red">{errors.password.message}</p>}
                         </div>
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <div className="text-sm">
-                            <a href="#" className="font-medium text-blue hover:text-blue/50">
-                                Forgot password?
-                            </a>
-                        </div>
+                        <a href="#" className="text-sm font-medium text-blue hover:text-blue/50">
+                            Forgot password?
+                        </a>
                     </div>
 
-                    <div>
-                        <button
-                            type="submit"
-                            className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/70 transition"
-                        >
-                            Sign In
-                        </button>
-                    </div>
+                    <button
+                        type="submit"
+                        className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/70 transition"
+                    >
+                        Sign In
+                    </button>
                 </form>
                 <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
                     Don&apos;t have an account?{' '}
